@@ -31,20 +31,25 @@ export default async function Home({ searchParams }: HomePageProps) {
         ? { viewsCount: "desc" as const }
         : { createdAt: "desc" as const }
 
-  const prompts = await prisma.prompt.findMany({
-    where,
-    orderBy,
-    include: {
-      images: { take: 1, orderBy: { sortOrder: "asc" as const } },
-      user: { select: { id: true, name: true, handle: true, avatar: true } },
-    },
-    take: 50,
-  })
+  let items: { id: string; content: React.ReactNode }[] = []
+  try {
+    const prompts = await prisma.prompt.findMany({
+      where,
+      orderBy,
+      include: {
+        images: { take: 1, orderBy: { sortOrder: "asc" as const } },
+        user: { select: { id: true, name: true, handle: true, avatar: true } },
+      },
+      take: 50,
+    })
 
-  const items = prompts.map((prompt) => ({
-    id: prompt.id,
-    content: <PromptCard prompt={prompt} />,
-  }))
+    items = prompts.map((prompt) => ({
+      id: prompt.id,
+      content: <PromptCard prompt={prompt} />,
+    }))
+  } catch (e) {
+    console.error("Failed to fetch prompts:", e)
+  }
 
   return (
     <div className="p-4">
