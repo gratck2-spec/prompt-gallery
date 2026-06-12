@@ -50,7 +50,7 @@ export function Header() {
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => window.location.href = "/profile"}>
+                <DropdownMenuItem onClick={() => window.location.href = `/u/${(session.user as any).handle || "me"}`}>
                   <User className="mr-2 h-4 w-4" />
                   Profile
                 </DropdownMenuItem>

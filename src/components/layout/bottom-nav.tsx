@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useSession } from "next-auth/react"
 import { Home, Search, Plus, Heart, User } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -10,16 +11,25 @@ const navItems = [
   { href: "/search", icon: Search, label: "Search" },
   { href: "/publish", icon: Plus, label: "Publish" },
   { href: "/favorites", icon: Heart, label: "Favorites" },
-  { href: "/profile", icon: User, label: "Profile" },
 ]
 
 export function BottomNav() {
   const pathname = usePathname()
+  const { data: session } = useSession()
+
+  const items = [
+    ...navItems,
+    {
+      href: session?.user ? `/u/${(session.user as any).handle || "me"}` : "/auth/signin",
+      icon: User,
+      label: "Profile",
+    },
+  ]
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background md:hidden">
       <div className="flex h-16 items-center justify-around px-4">
-        {navItems.map((item) => {
+        {items.map((item) => {
           const isActive = pathname === item.href
           return (
             <Link

@@ -33,6 +33,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# db debug / diagnostic scripts (may contain credentials)
+check-db.cjs
+
 # vercel
 .vercel
 

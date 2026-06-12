@@ -13,11 +13,11 @@ const navItems = [
 ]
 
 const categories = [
-  { href: "/category/gpt-image", label: "GPT Image" },
-  { href: "/category/gemini", label: "Gemini" },
-  { href: "/category/midjourney", label: "Midjourney" },
-  { href: "/category/seedance", label: "Seedance" },
-  { href: "/category/other", label: "Other" },
+  { href: "/?model=gpt-image", label: "GPT Image" },
+  { href: "/?model=gemini", label: "Gemini" },
+  { href: "/?model=midjourney", label: "Midjourney" },
+  { href: "/?model=seedance", label: "Seedance" },
+  { href: "/?model=other", label: "Other" },
 ]
 
 export function Sidebar() {
