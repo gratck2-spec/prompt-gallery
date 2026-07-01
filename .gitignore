@@ -13,3 +13,4 @@ PROJECT-PLAN.md
 
 # Logs
 *.log
+.env
