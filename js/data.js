@@ -1,7 +1,7 @@
 let promptsData = [];
 
 const SUPABASE_URL = 'https://eywuqzlsaqtxcshuiqhu.supabase.co';
-const SUPABASE_KEY = 'eyJhbG...Rj_A';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5d3VxemxzYXF0eGNzaHVpcWh1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4NzIwNTAsImV4cCI6MjA5ODQ0ODA1MH0.D4IeY083nAPOcSEWsQmg5G3gr_YkemU6TTS4BfwRj_A';
 
 async function loadPrompts() {
   try {
