@@ -298,6 +298,75 @@
     }
   }
 
+  // ---- Delete Prompt ----
+  async function deletePrompt(id, imageUrl, thumbnailUrl) {
+    if (!confirm('Are you sure you want to delete this prompt?')) return;
+    
+    showLoading('Deleting...');
+    try {
+      const client = getClient();
+      
+      // Delete from database
+      const { error: dbError } = await client.from('prompts').delete().eq('id', id);
+      if (dbError) throw dbError;
+      
+      // Delete images from storage
+      if (imageUrl) {
+        const imagePath = imageUrl.split('/').pop();
+        await client.storage.from(STORAGE_BUCKET).remove(['uploads/' + imagePath]);
+      }
+      if (thumbnailUrl) {
+        const thumbPath = thumbnailUrl.split('/').pop();
+        await client.storage.from(STORAGE_BUCKET).remove(['uploads/' + thumbPath]);
+      }
+      
+      hideLoading();
+      notify('Prompt deleted successfully', 'success');
+      
+      // Reload list if visible
+      if (document.getElementById('prompts-list-section').style.display !== 'none') {
+        loadPromptsList();
+      }
+    } catch (err) {
+      hideLoading();
+      notify(err.message || 'Failed to delete', 'error');
+    }
+  }
+
+  // ---- Load Prompts List ----
+  async function loadPromptsList() {
+    const container = document.getElementById('prompts-list');
+    container.innerHTML = '<p class="loading-text">Loading...</p>';
+    
+    try {
+      const client = getClient();
+      const { data, error } = await client.from('prompts').select('*').order('created_at', { ascending: false });
+      
+      if (error) throw error;
+      
+      if (!data || data.length === 0) {
+        container.innerHTML = '<p class="empty-text">No prompts yet. Upload your first one!</p>';
+        return;
+      }
+      
+      container.innerHTML = data.map(p => `
+        <div class="prompt-item" data-id="${p.id}">
+          <img src="${p.thumbnail_url || p.image_url}" alt="${p.title}" class="prompt-thumb">
+          <div class="prompt-info">
+            <span class="prompt-title">${p.title}</span>
+            <span class="prompt-meta">${p.category} • ${p.model}</span>
+          </div>
+          <button class="btn-delete" onclick="window._deletePrompt('${p.id}', '${p.image_url}', '${p.thumbnail_url}')">Delete</button>
+        </div>
+      `).join('');
+    } catch (err) {
+      container.innerHTML = '<p class="error-text">Failed to load prompts</p>';
+    }
+  }
+
+  // Expose delete function globally for onclick
+  window._deletePrompt = deletePrompt;
+
   // ---- Reset for "Add Another" ----
   function resetWizard() {
     currentStep = 1;
@@ -374,6 +443,24 @@
 
     // Add Another
     document.getElementById('btn-add-another').addEventListener('click', resetWizard);
+
+    // Manage Prompts
+    document.getElementById('btn-manage').addEventListener('click', () => {
+      document.querySelector('.wizard-container').style.display = 'none';
+      document.querySelector('.step-indicator').style.display = 'none';
+      document.querySelector('.step-actions').style.display = 'none';
+      document.getElementById('prompts-list-section').style.display = 'block';
+      loadPromptsList();
+    });
+
+    // Back to Wizard
+    document.getElementById('btn-back-to-wizard').addEventListener('click', () => {
+      document.querySelector('.wizard-container').style.display = '';
+      document.querySelector('.step-indicator').style.display = '';
+      document.querySelector('.step-actions').style.display = '';
+      document.getElementById('prompts-list-section').style.display = 'none';
+      goToStep(1);
+    });
 
     // Go to step 1
     goToStep(1);
