@@ -21,6 +21,7 @@ function renderGallery(prompts) {
     card.className = 'card';
     card.dataset.id = p.id;
     card.dataset.category = p.category;
+    card.dataset.model = p.model || '';
     card.dataset.tags = (p.tags || []).join(',');
 
     card.innerHTML =
@@ -44,11 +45,25 @@ function renderGallery(prompts) {
 }
 
 function filterByCategory(cat) {
+  window._activeCategory = cat;
+  applyFilters();
+}
+
+function filterByModel(model) {
+  window._activeModel = model;
+  applyFilters();
+}
+
+function applyFilters() {
+  var cat = window._activeCategory || 'all';
+  var model = window._activeModel || 'all';
   var cards = document.querySelectorAll('.card');
   var hasVisible = false;
 
   cards.forEach(function (card) {
-    if (cat === 'all' || card.dataset.category === cat) {
+    var catMatch = (cat === 'all' || card.dataset.category === cat);
+    var modelMatch = (model === 'all' || card.dataset.model === model);
+    if (catMatch && modelMatch) {
       card.classList.remove('hidden');
       hasVisible = true;
     } else {

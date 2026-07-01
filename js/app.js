@@ -52,10 +52,10 @@
     searchInput.addEventListener('input', debouncedSearch);
 
     // Category filters
-    var filterBtns = document.querySelectorAll('.filter-btn');
-    filterBtns.forEach(function (btn) {
+    var catBtns = document.querySelectorAll('.filter-btn:not(.model-filter)');
+    catBtns.forEach(function (btn) {
       btn.addEventListener('click', function () {
-        filterBtns.forEach(function (b) { b.classList.remove('active'); });
+        catBtns.forEach(function (b) { b.classList.remove('active'); });
         btn.classList.add('active');
         currentCategory = btn.dataset.category;
         filterByCategory(currentCategory);
@@ -63,9 +63,18 @@
         // Also re-run search if there's a query
         var query = searchInput.value.trim();
         if (query) {
-          // After category filter, also apply search
           searchPrompts(query);
         }
+      });
+    });
+
+    // Model filters
+    var modelBtns = document.querySelectorAll('.model-filter');
+    modelBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        modelBtns.forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        filterByModel(btn.dataset.model);
       });
     });
   }

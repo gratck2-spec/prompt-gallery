@@ -14,7 +14,7 @@
     thumbnailUrl: null,
     prompt: '',
     negative: '',
-    model: 'Midjourney v6',
+    model: '',
     category: 'portrait',
     title: '',
     tags: [],
@@ -108,6 +108,10 @@
       }
       state.negative = document.getElementById('negative-prompt').value.trim();
       state.model = document.getElementById('model-select').value;
+      if (!state.model) {
+        notify('Please select a model', 'error');
+        valid = false;
+      }
       state.category = document.getElementById('category-select').value;
     } else if (step === 3) {
       const title = document.getElementById('title-input');
@@ -375,7 +379,7 @@
     state.thumbnailUrl = null;
     state.prompt = '';
     state.negative = '';
-    state.model = 'Midjourney v6';
+    state.model = '';
     state.category = 'portrait';
     state.title = '';
     state.tags = [];
@@ -388,7 +392,7 @@
     document.getElementById('preview-image').src = '';
     document.getElementById('prompt-text').value = '';
     document.getElementById('negative-prompt').value = '';
-    document.getElementById('model-select').value = 'Midjourney v6';
+    document.getElementById('model-select').value = '';
     document.getElementById('category-select').value = 'portrait';
     document.getElementById('title-input').value = '';
     document.getElementById('tags-input').value = '';
