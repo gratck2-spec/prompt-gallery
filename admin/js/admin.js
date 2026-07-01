@@ -95,7 +95,7 @@
     let valid = true;
 
     if (step === 1) {
-      if (!state.imageUrl) {
+      if (!state.imageFile) {
         notify('Please upload an image', 'error');
         valid = false;
       }
