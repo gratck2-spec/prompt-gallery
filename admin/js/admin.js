@@ -283,6 +283,7 @@
         title: state.title,
         tags: state.tags,
         aspect_ratio: state.aspectRatio,
+        published: true,
         created_at: new Date().toISOString()
       });
 
