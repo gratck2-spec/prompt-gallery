@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "Ethereal Mountain Landscape",
+    "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+    "thumbnail": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400",
+    "prompt": "Ethereal mountain landscape at golden hour, misty valleys between dramatic peaks, volumetric lighting through clouds, ultra realistic photography, 8k resolution, cinematic composition, warm golden tones with cool shadow contrast",
+    "negative_prompt": "blurry, low quality, text, watermark, oversaturated",
+    "model": "Nano Banana",
+    "category": "landscape",
+    "tags": ["mountain", "golden hour", "cinematic", "realistic"],
+    "aspect_ratio": "16:9"
+  },
+  {
+    "id": 2,
+    "title": "Neon Cyberpunk Alley",
+    "image": "https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=800",
+    "thumbnail": "https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=400",
+    "prompt": "Narrow cyberpunk alley at night, neon signs in Japanese and English, wet reflections on pavement, steam rising from vents, holographic advertisements, blade runner atmosphere, ultra detailed, moody lighting",
+    "negative_prompt": "daylight, clean, minimalist, text errors",
+    "model": "ChatGPT Image",
+    "category": "abstract",
+    "tags": ["cyberpunk", "neon", "night", "urban"],
+    "aspect_ratio": "9:16"
+  },
+  {
+    "id": 3,
+    "title": "Portrait in Natural Light",
+    "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800",
+    "thumbnail": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+    "prompt": "Professional portrait photography, woman by window with soft natural light, shallow depth of field f/1.8, warm skin tones, authentic expression, studio quality, bokeh background, 85mm lens",
+    "negative_prompt": "harsh lighting, artificial, plastic skin, oversmoothed",
+    "model": "Nano Banana",
+    "category": "portrait",
+    "tags": ["portrait", "natural light", "bokeh", "professional"],
+    "aspect_ratio": "4:5"
+  },
+  {
+    "id": 4,
+    "title": "Fluid Abstract Art",
+    "image": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800",
+    "thumbnail": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=400",
+    "prompt": "Abstract fluid art, swirling colors of teal and coral, marble texture effect, high contrast, glossy finish, modern art style, 4k resolution, clean composition",
+    "negative_prompt": "muddy colors, low contrast, pixelated, text",
+    "model": "ChatGPT Image",
+    "category": "abstract",
+    "tags": ["abstract", "fluid", "marble", "colorful"],
+    "aspect_ratio": "1:1"
+  },
+  {
+    "id": 5,
+    "title": "Minimal Product Photography",
+    "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800",
+    "thumbnail": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400",
+    "prompt": "Minimalist product photography, luxury watch on clean white surface, soft directional lighting, subtle shadow, commercial quality, studio setup, sharp focus, neutral background",
+    "negative_prompt": "cluttered background, harsh shadows, reflections, dust",
+    "model": "Nano Banana",
+    "category": "product",
+    "tags": ["product", "minimalist", "commercial", "studio"],
+    "aspect_ratio": "16:9"
+  }
+]

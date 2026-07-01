@@ -1,0 +1,15 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project plan (local only)
+PROJECT-PLAN.md
+
+# Logs
+*.log
