@@ -475,6 +475,18 @@ body {
   background: rgba(255, 107, 107, 0.2);
 }
 
+/* --- Aspect Ratio Badge --- */
+.ar-badge {
+  display: inline-block;
+  background: rgba(0, 212, 170, 0.15);
+  color: var(--accent);
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+}
+
 /* --- Aspect Ratio Options --- */
 .aspect-options {
   display: grid;

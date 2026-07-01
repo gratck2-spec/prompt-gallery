@@ -181,6 +181,9 @@
       content.style.display = 'flex';
       preview.style.display = 'none';
       input.value = '';
+      // Hide aspect ratio badge
+      const badge = document.getElementById('ar-badge');
+      if (badge) badge.style.display = 'none';
     });
   }
 
@@ -196,8 +199,47 @@
       document.getElementById('preview-image').src = e.target.result;
       document.getElementById('upload-content').style.display = 'none';
       document.getElementById('upload-preview').style.display = 'flex';
+
+      // Auto-detect aspect ratio from image dimensions
+      const img = new Image();
+      img.onload = () => {
+        const detected = detectAspectRatio(img.width, img.height);
+        state.aspectRatio = detected;
+        // Auto-select matching radio
+        const radio = document.querySelector('input[name="aspect"][value="' + detected + '"]');
+        if (radio) radio.checked = true;
+        // Show badge
+        const badge = document.getElementById('ar-badge');
+        if (badge) {
+          badge.textContent = 'Auto-detected: ' + detected + ' (' + img.width + '×' + img.height + ')';
+          badge.style.display = 'inline';
+        }
+      };
+      img.src = e.target.result;
     };
     reader.readAsDataURL(file);
+  }
+
+  function detectAspectRatio(w, h) {
+    const ratio = w / h;
+    const ratios = [
+      { label: '1:1',  value: 1 },
+      { label: '16:9', value: 16/9 },
+      { label: '9:16', value: 9/16 },
+      { label: '4:3',  value: 4/3 },
+      { label: '3:4',  value: 3/4 },
+      { label: '3:2',  value: 3/2 }
+    ];
+    let closest = ratios[0];
+    let minDiff = Math.abs(ratio - ratios[0].value);
+    for (let i = 1; i < ratios.length; i++) {
+      const diff = Math.abs(ratio - ratios[i].value);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closest = ratios[i];
+      }
+    }
+    return closest.label;
   }
 
   // ---- Thumbnail Generation ----
@@ -398,6 +440,9 @@
     document.getElementById('tags-input').value = '';
     const defaultRadio = document.querySelector('input[name="aspect"][value="1:1"]');
     if (defaultRadio) defaultRadio.checked = true;
+    // Hide AR badge
+    const badge = document.getElementById('ar-badge');
+    if (badge) badge.style.display = 'none';
 
     document.getElementById('success-overlay').style.display = 'none';
     goToStep(1);
