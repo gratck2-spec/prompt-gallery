@@ -25,7 +25,7 @@ function renderGallery(prompts) {
 
     card.innerHTML =
       '<div class="card-image-wrap">' +
-        '<img class="card-image" src="' + p.thumbnail + '" alt="' + escapeHtml(p.title) + '" loading="lazy">' +
+        '<img class="card-image" src="' + (p.thumbnail_url || p.thumbnail || p.image) + '" alt="' + escapeHtml(p.title) + '" loading="lazy">' +
         '<div class="card-overlay">' +
           '<span class="card-title-overlay">' + escapeHtml(p.title) + '</span>' +
         '</div>' +

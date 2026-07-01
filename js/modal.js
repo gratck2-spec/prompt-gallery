@@ -5,7 +5,7 @@
 function openModal(prompt) {
   var overlay = document.getElementById('modal-overlay');
 
-  document.getElementById('modal-image').src = prompt.image;
+  document.getElementById('modal-image').src = prompt.image_url || prompt.image;
   document.getElementById('modal-image').alt = prompt.title;
   document.getElementById('modal-title').textContent = prompt.title;
   document.getElementById('modal-category').textContent = prompt.category;
