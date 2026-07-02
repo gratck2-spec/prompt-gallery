@@ -3,12 +3,7 @@
    ============================================ */
 
 /* --- CSS Variables (matching main site) --- */
-:root 
-/* --- iOS Safe Area + Dynamic Viewport --- */
-@supports (height: 100dvh) {
-  body { min-height: 100dvh; }
-}
-{
+:root {
   --bg: #0a0a0f;
   --bg-secondary: #0e0e14;
   --card: #12121a;
@@ -874,4 +869,9 @@ body {
   text-align: center;
   color: var(--text-secondary);
   padding: 2rem;
+}
+
+/* --- iOS Safe Area + Dynamic Viewport --- */
+@supports (height: 100dvh) {
+  body { min-height: 100dvh; }
 }
