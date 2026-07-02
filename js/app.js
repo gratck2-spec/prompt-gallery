@@ -5,7 +5,6 @@
 (function () {
   'use strict';
 
-  var currentCategory = 'all';
   var debounceTimer = null;
 
   // --- Theme ---
@@ -50,23 +49,6 @@
       searchPrompts(searchInput.value);
     }, 300);
     searchInput.addEventListener('input', debouncedSearch);
-
-    // Category filters
-    var catBtns = document.querySelectorAll('.filter-btn:not(.model-filter)');
-    catBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        catBtns.forEach(function (b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        currentCategory = btn.dataset.category;
-        filterByCategory(currentCategory);
-
-        // Also re-run search if there's a query
-        var query = searchInput.value.trim();
-        if (query) {
-          searchPrompts(query);
-        }
-      });
-    });
 
     // Model filters
     var modelBtns = document.querySelectorAll('.model-filter');
