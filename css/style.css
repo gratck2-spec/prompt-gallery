@@ -565,6 +565,12 @@ body.light-mode .icon-moon { display: none; }
    ============================================ */
 
 /* Tablet */
+
+/* --- iOS Safe Area + Dynamic Viewport --- */
+@supports (height: 100dvh) {
+  .gallery { min-height: 100dvh; }
+  .modal { max-height: 100dvh; height: 100dvh; }
+}
 @media (max-width: 1024px) {
   .gallery {
     columns: 2;
@@ -572,6 +578,13 @@ body.light-mode .icon-moon { display: none; }
 }
 
 @media (max-width: 768px) {
+
+  .filter-btn {
+    padding: 10px 16px;
+    min-height: 44px;
+    font-size: 14px;
+  }
+
   .header-inner {
     padding: 0 16px;
     height: 56px;

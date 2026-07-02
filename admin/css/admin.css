@@ -3,7 +3,12 @@
    ============================================ */
 
 /* --- CSS Variables (matching main site) --- */
-:root {
+:root 
+/* --- iOS Safe Area + Dynamic Viewport --- */
+@supports (height: 100dvh) {
+  body { min-height: 100dvh; }
+}
+{
   --bg: #0a0a0f;
   --bg-secondary: #0e0e14;
   --card: #12121a;
